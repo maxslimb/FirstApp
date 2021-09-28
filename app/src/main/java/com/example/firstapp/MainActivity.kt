@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
 //            textview.text = "Hi I am Kishan !"
 //        }
 //
-        val a: Drawable
+        var a: Drawable
         val data1 = arrayListOf<data_r2>()
         data1.add(data_r2(a!!,"white"))
 
