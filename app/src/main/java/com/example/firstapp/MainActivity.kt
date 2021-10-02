@@ -1,6 +1,7 @@
 package com.example.firstapp
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,6 +14,8 @@ import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.StringRequestListener
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
@@ -25,6 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         val response_textview = findViewById<TextView>(R.id.text1)
         val button = findViewById<Button>(R.id.bt1)
+        val signout_button = findViewById<Button>(R.id.signout)
         button.setOnClickListener {
 
             AndroidNetworking.get("https://doubtconnect.in:3001")
@@ -42,6 +46,11 @@ class MainActivity : AppCompatActivity() {
                     }
 
                 })
+        }
+
+        signout_button.setOnClickListener {
+            Firebase.auth.signOut()
+            startActivity(Intent(this,LoginActivity::class.java))
         }
 
 
