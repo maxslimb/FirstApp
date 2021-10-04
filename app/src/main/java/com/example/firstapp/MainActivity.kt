@@ -15,6 +15,10 @@ import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.StringRequestListener
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
@@ -29,6 +33,23 @@ class MainActivity : AppCompatActivity() {
         val response_textview = findViewById<TextView>(R.id.text1)
         val button = findViewById<Button>(R.id.bt1)
         val signout_button = findViewById<Button>(R.id.signout)
+        val uid = Firebase.auth.uid
+        val database = Firebase.database
+        val myRef = database.getReference("Users/$uid/")
+        myRef.child("number").removeValue()
+        myRef.setValue("Hello, World!")
+
+        myRef.addListenerForSingleValueEvent(object: ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
+
         button.setOnClickListener {
 
             AndroidNetworking.get("https://doubtconnect.in:3001")

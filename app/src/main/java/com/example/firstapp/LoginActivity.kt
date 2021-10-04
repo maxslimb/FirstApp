@@ -66,7 +66,7 @@ class LoginActivity : AppCompatActivity() {
 
                     Log.d(TAG, "signInWithCredential:success")
                     val user = auth.currentUser
-                    startActivity(Intent(this,MainActivity::class.java))
+                    startActivity(Intent(this,LoginActivity::class.java))
 
                 } else {
                     // If sign in fails, display a message to the user.
