@@ -35,20 +35,20 @@ class MainActivity : AppCompatActivity() {
         val signout_button = findViewById<Button>(R.id.signout)
         val uid = Firebase.auth.uid
         val database = Firebase.database
-        val myRef = database.getReference("Users/$uid/")
-        myRef.child("number").removeValue()
-        myRef.setValue("Hello, World!")
-
-        myRef.addListenerForSingleValueEvent(object: ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-
-            }
-
-        })
+//        val myRef = database.getReference("Users/$uid/")
+//        myRef.child("number").removeValue()
+//        myRef.setValue("Hello, World!")
+//
+//        myRef.addListenerForSingleValueEvent(object: ValueEventListener{
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//
+//            }
+//
+//        })
 
         button.setOnClickListener {
 
@@ -74,6 +74,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this,LoginActivity::class.java))
         }
 
+        findViewById<Button>(R.id.profile_button).setOnClickListener {
+            startActivity(Intent(this,ProfileActivity::class.java))
+        }
 
         val data1 = arrayListOf<data_r2>()
       // data1.add(data_r2("https://firebasestorage.googleapis.com/v0/b/doubtconnect-a1cf3.appspot.com/o/doubts%2F20200503_024701.jpg?alt=media&token=fa18c9ca-286f-4a1a-a917-6e738abf19bc","Grey"))
