@@ -6,7 +6,9 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import com.bumptech.glide.Glide
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -22,6 +24,7 @@ class ProfileActivity : AppCompatActivity() {
         setContentView(R.layout.activity_profile)
         val name = findViewById<EditText>(R.id.name_profile)
         val email = findViewById<EditText>(R.id.email_profile)
+        val profile_image =findViewById<ImageView>(R.id.imageView2_profile)
         val submit_button = findViewById<Button>(R.id.submit_bt_profile)
 
         val database = Firebase.database.getReference("Users/${Firebase.auth.uid}")
@@ -30,6 +33,11 @@ class ProfileActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 name.setText(snapshot.child("name").value.toString())
                 email.setText(snapshot.child("email").value.toString())
+                if(snapshot.child("photoUrl").value.toString() != "")
+                Glide.with(this@ProfileActivity)
+                    .load(snapshot.child("photoUrl").value.toString())
+                    .centerCrop()
+                    .into(profile_image)
                 Log.d(TAG,snapshot.toString())
             }
 

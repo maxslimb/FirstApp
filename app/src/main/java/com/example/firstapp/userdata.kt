@@ -4,7 +4,8 @@ import com.google.firebase.database.Exclude
 
 data class userdata(
     var name: String? = "",
-    var email: String? = ""
+    var email: String? = "",
+    var photoUrl: String? = ""
 
 ) {
 
@@ -13,6 +14,7 @@ data class userdata(
         return mapOf(
             "name" to name,
             "email" to email,
+            "photoUrl" to photoUrl
         )
     }
 }
