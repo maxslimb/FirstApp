@@ -1,8 +1,7 @@
-package com.example.firstapp
+package com.example.firstapp.MainScreens
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -14,12 +13,15 @@ import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
 import com.androidnetworking.interfaces.StringRequestListener
+import com.example.firstapp.LoginActivity
+import com.example.firstapp.NumberListAdapter
+import com.example.firstapp.R
+import com.example.firstapp.data_r2
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.messaging.FirebaseMessaging
 
 class MainActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
@@ -27,6 +29,17 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+            FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
+            val token = task.result
+            Log.d(TAG, "FCM TOKEN:  $token")
+        })
+
+
 
         AndroidNetworking.initialize(applicationContext)
 
@@ -71,11 +84,13 @@ class MainActivity : AppCompatActivity() {
 
         signout_button.setOnClickListener {
             Firebase.auth.signOut()
-            startActivity(Intent(this,LoginActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
         }
 
         findViewById<Button>(R.id.profile_button).setOnClickListener {
-            startActivity(Intent(this,ProfileActivity::class.java))
+            val intent = Intent(this, ProfileActivity::class.java)
+            intent.putExtra("current-user",true)
+            startActivity(intent)
         }
 
         val data1 = arrayListOf<data_r2>()

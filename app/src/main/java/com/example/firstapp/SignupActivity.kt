@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.firstapp.MainScreens.MainActivity
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -45,7 +46,7 @@ class SignupActivity : AppCompatActivity() {
             val userupdates = hashMapOf<String, Any>("Users/${Firebase.auth.uid}/" to data)
             database.updateChildren(userupdates).addOnSuccessListener {
                 Log.d(TAG,"Successfully stored user data to firebase db")
-                startActivity(Intent(this,MainActivity::class.java))
+                startActivity(Intent(this, MainActivity::class.java))
             }
         }
     }
