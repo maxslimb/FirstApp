@@ -17,8 +17,11 @@
         <activity android:name=".MainScreens.MainActivity"/>
         <activity android:name=".SignupActivity"/>
         <activity android:name=".MainScreens.ProfileActivity"/>
+        <activity android:name=".LoginActivity"/>
+        <activity android:name=".afterNotification"/>
+        <activity android:name=".Notification"/>
         <activity
-            android:name=".LoginActivity"
+            android:name=".color"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
